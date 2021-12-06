@@ -161,19 +161,30 @@ class Admin extends CI_Controller {
 		}
 	} 
 
+	public function view_all_qna(){
 
-
-
-
-	public function ajax(){
-		$this->load->view('ajax');		
 	}
 
-	public function ajax_(){
-		$data = array(
-			'username' => $this->input->post('name'),
-			'pwd'=>$this->input->post('pwd')
-		);
-		echo json_encode($data['username']);
+	public function add_qna(){
+		$data['category'] = $this->admin_model->getCategory();
+		$this->load->view('ajax',$data);
+	}
+
+	public function add_q(){	
+		$body = $this->input->post();
+		$json_data = json_encode($body);
+		$this->admin_model->addQuestions($json_data); 
+	}
+
+	public function edit_qna(){
+
+	}
+
+	public function delete_qna(){
+
+	}
+
+
+	public function ajax(){	
 	}
 }

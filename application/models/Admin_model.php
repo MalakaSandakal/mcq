@@ -36,6 +36,19 @@
 		public function deleteCategory($id){
 			return $this->db->delete('categories',['id'=>$id]);
 		}
- 
+		
+
+		// questions
+		public function addQuestions($json_data){
+			echo $json_data;
+			$query = "select add_question('$json_data')";
+			$this->db->query($query);
+		}
+
+		public function getCategory(){
+			$query = $this->db->get('categories');
+			return $query;
+		}
+		
 	}
 ?>

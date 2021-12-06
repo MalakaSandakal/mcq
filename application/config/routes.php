@@ -14,4 +14,4 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
-$route['ajax'] = 'admin/ajax';
+$route['ajax'] = 'admin/add_qna';

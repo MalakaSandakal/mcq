@@ -163,19 +163,33 @@ class Admin extends CI_Controller {
 		$this->admin_model->addQuestions($json_data); 
 	}
 
-	public function editQuestions($id){
+	public function getQuestions($id){
 		$this->load->library('session');
 		if($this->session->userdata('user')){
-
-			$quest_data['question-data'] =$this->admin_model->editQuestion($id);
-			$encoded = json_encode($quest_data);
-			echo $encoded;
-
 			$data['category'] = $this->admin_model->getCategory();
+			$data['questiondata'] =json_encode($this->admin_model->editQuestion($id));
+			// echo $data['questiondata'];
 			$this->load->view('Admin/questions/editQuestion',$data);
 		}
 		else{
 			redirect('admin');
 		}
 	}
+
+	public function getQ_($id){		
+		$quest_data['questiondata'] =$this->admin_model->editQuestion($id);
+		$encoded = json_encode($quest_data);
+		echo $encoded;
+	}
+
+	public function deleteQuestions($id){
+		$this->load->library('session');
+		if($this->session->userdata('user')){
+			$this->admin_model->deleteQuestion($id);
+			redirect('admin/questions');
+		}
+		else{
+			redirect('admin');
+		}
+	} 
 }

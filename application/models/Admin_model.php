@@ -60,5 +60,9 @@
 			$res = $this->db->query($query);
 			return $res->result_array();
 		}
+
+		public function deleteQuestion($id){
+			return $this->db->delete('questions',['id'=>$id]);
+		}
 	}
 ?>

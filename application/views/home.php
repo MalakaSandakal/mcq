@@ -50,7 +50,7 @@
                                 <td class="l-width"><?php echo $row->question;?></td>
                                 <td>
                                     <a href="<?php echo base_url('admin/questions/edit/').$row->id ?>" class="button-admin btn-edit">edit</a>
-                                    <a href="<?php echo base_url('admin/categories/delete/').$row->id ?>" class="button-admin btn-delete" style="float:right">delete</a>
+                                    <a href="<?php echo base_url('admin/questions/delete/').$row->id ?>" class="button-admin btn-delete" style="float:right">delete</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

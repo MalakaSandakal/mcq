@@ -49,7 +49,8 @@ class Admin extends CI_Controller {
 	public function home(){
 		$this->load->library('session');
 		if($this->session->userdata('user')){
-			$this->load->view('home');
+			$data['question'] = $this->admin_model->viewQuestions();		
+			$this->load->view('home', $data);
 		}
 		else{
 			redirect('admin');
@@ -62,23 +63,7 @@ class Admin extends CI_Controller {
 		$this->load->library('session');
 		$this->session->unset_userdata('user');
 		redirect('admin');
-	}
-
-
-	/*
-		****
-			Category functions (View, Update, Delete)
-		****
-	*/
-    public function addQuestions(){
-        $this->load->library('session');
-		if($this->session->userdata('user')){
-			$this->load->view('addQuestion');
-		}
-		else{
-			redirect('admin');
-		}
-    }	
+	}	
 
 
 	/*
@@ -160,15 +145,17 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	} 
-
-	public function view_all_qna(){
-
-	}
-
-	public function add_qna(){
-		$data['category'] = $this->admin_model->getCategory();
-		$this->load->view('ajax',$data);
-	}
+	
+    public function addQuestions(){
+        $this->load->library('session');
+		if($this->session->userdata('user')){
+			$data['category'] = $this->admin_model->getCategory();
+			$this->load->view('Admin/questions/addQuestion',$data);
+		}
+		else{
+			redirect('admin');
+		}
+    }
 
 	public function add_q(){	
 		$body = $this->input->post();
@@ -176,15 +163,19 @@ class Admin extends CI_Controller {
 		$this->admin_model->addQuestions($json_data); 
 	}
 
-	public function edit_qna(){
+	public function editQuestions($id){
+		$this->load->library('session');
+		if($this->session->userdata('user')){
 
-	}
+			$quest_data['question-data'] =$this->admin_model->editQuestion($id);
+			$encoded = json_encode($quest_data);
+			echo $encoded;
 
-	public function delete_qna(){
-
-	}
-
-
-	public function ajax(){	
+			$data['category'] = $this->admin_model->getCategory();
+			$this->load->view('Admin/questions/editQuestion',$data);
+		}
+		else{
+			redirect('admin');
+		}
 	}
 }

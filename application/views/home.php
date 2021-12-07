@@ -35,10 +35,28 @@
     <div class="container">
 		<div class="col-md-10 pt-3" style="text-align: right;">
 			<a class="btn btn-primary" href="<?php echo base_url(); ?>admin/addQuestion">Add Question</a>
-		</div>
-		<table>
-
-		</table>
+		</div>   
+        <div class="col-md-8 mt-3">
+                    <table class="table table-bordered table-secondary">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="l-width">Question</th>
+                                <th class="l-width" style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach($question as $row) : ?>
+                            <tr>
+                                <td class="l-width"><?php echo $row->question;?></td>
+                                <td>
+                                    <a href="<?php echo base_url('admin/questions/edit/').$row->id ?>" class="button-admin btn-edit">edit</a>
+                                    <a href="<?php echo base_url('admin/categories/delete/').$row->id ?>" class="button-admin btn-delete" style="float:right">delete</a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>            
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">

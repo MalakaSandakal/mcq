@@ -49,6 +49,16 @@
 			$query = $this->db->get('categories');
 			return $query;
 		}
-		
+		public function viewQuestions(){
+			$q = "select id,question from questions";
+			$query = $this->db->query($q);
+			return $query->result();
+		}
+
+		public function editQuestion($id){
+			$query = "select get_question('$id')";			
+			$res = $this->db->query($query);
+			return $res->result_array();
+		}
 	}
 ?>

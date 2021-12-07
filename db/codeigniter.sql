@@ -39,10 +39,6 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `fname`) VALUES
-(1, 'ndevierte@gmail.com', 'nurhodelta', 'Neovic Devierte'),
-(2, 'gemalyn@gmail.com', 'cepe', 'Gemalyn Cepe');
-
 --
 -- Indexes for dumped tables
 --
@@ -67,3 +63,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+

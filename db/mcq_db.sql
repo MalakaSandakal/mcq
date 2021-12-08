@@ -122,9 +122,13 @@ DECLARE
     _answer      JSON;
 BEGIN
 -- update
-    UPDATE questions SET question = (_body ->> 'question')::TEXT, sort_order=(_body ->> 'sort_order')::INT WHERE id = _question_id;
+    -- DELETE FROM questions WHERE  question_id = _question_id;
 
-    DELETE FROM question_categories WHERE question_id = _question_id AND category_id= (_body ->> 'catgeory')::uuid; 
+    -- INSERT INTO questions(question, sort_order) VALUES ((_body->>'question')::TEXT, (_body->>'sort_order')::INT) RETURNING id INTO _question_id;
+
+    UPDATE questions SET question = (_body ->> 'question')::TEXT, sort_order=(_body ->> 'sort_order')::INT WHERE id = _question_id::uuid;
+
+    DELETE FROM question_categories WHERE question_id = _question_id; 
 
     INSERT INTO question_categories(question_id, category_id) VALUES (_question_id, (_body ->> 'category')::uuid);
 

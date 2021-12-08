@@ -8,7 +8,7 @@ $route['allcategories'] = 'users/allcategories';
 $route['admin'] = 'admin';
 $route['admin/questions'] = 'admin/home';
 $route['admin/addQuestion'] = 'admin/addQuestions';
-$route['admin/questions/edit/(:any)'] = 'admin/getQuestions/$1';
+$route['admin/questions/edit/(:any)'] = 'admin/view_edit_page/$1';
 $route['admin/questions/edit/get/(:any)'] = 'admin/getQ_/$1';
 $route['admin/questions/update/(:any)'] = 'admin/updateQuestions/$1';
 $route['admin/questions/delete/(:any)'] = 'admin/deleteQuestions/$1';
@@ -22,6 +22,3 @@ $route['admin/categories/delete/(:any)'] = 'admin/deleteCategories/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-
-$route['ajax'] = 'admin/add_qna';

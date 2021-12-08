@@ -44,19 +44,6 @@ class Admin extends CI_Controller {
 			$this->session->set_flashdata('error','Invalid login. User not found');
 		} 
 	} 
-
-	// admin home page (questions page)
-	public function home(){
-		$this->load->library('session');
-		if($this->session->userdata('user')){
-			$data['question'] = $this->admin_model->viewQuestions();		
-			$this->load->view('home', $data);
-		}
-		else{
-			redirect('admin');
-		}
- 
-	}	
 	
 	// logout
 	public function logout(){
@@ -145,6 +132,20 @@ class Admin extends CI_Controller {
 			redirect('admin');
 		}
 	} 
+
+	
+	// admin home page (questions page)
+	public function home(){
+		$this->load->library('session');
+		if($this->session->userdata('user')){
+			$data['question'] = $this->admin_model->viewQuestions();		
+			$this->load->view('Admin/questions/questions', $data);
+		}
+		else{
+			redirect('admin');
+		}
+ 
+	}	
 	
     public function addQuestions(){
         $this->load->library('session');
@@ -163,12 +164,18 @@ class Admin extends CI_Controller {
 		$this->admin_model->addQuestions($json_data); 
 	}
 
-	public function getQuestions($id){
+	public function update_q($id_){
+		// $question_id  = $this->input->post('question_id');
+		$body = $this->input->post();
+		$json_data = json_encode($body);
+		$this->admin_model->updateQuestions($id_, $json_data); 
+	}
+
+	public function view_edit_page($id){
 		$this->load->library('session');
 		if($this->session->userdata('user')){
 			$data['category'] = $this->admin_model->getCategory();
-			$data['questiondata'] =json_encode($this->admin_model->editQuestion($id));
-			// echo $data['questiondata'];
+			$data['id'] = $id;
 			$this->load->view('Admin/questions/editQuestion',$data);
 		}
 		else{
@@ -176,9 +183,9 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function getQ_($id){		
-		$quest_data['questiondata'] =$this->admin_model->editQuestion($id);
-		$encoded = json_encode($quest_data);
+	public function getq_($id){		
+		$quest_data =$this->admin_model->editQuestion($id);
+		$encoded = json_encode($quest_data[0]);
 		echo $encoded;
 	}
 

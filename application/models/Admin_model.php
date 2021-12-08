@@ -40,17 +40,24 @@
 
 		// questions
 		public function addQuestions($json_data){
-			echo $json_data;
 			$query = "select add_question('$json_data')";
 			$this->db->query($query);
 		}
+
+		public function updateQuestions($id_, $json_data){
+			echo $id_;
+			echo $json_data;
+			$query = "select update_question('$id_','$json_data')";
+			$this->db->query($query);
+		}
+
 
 		public function getCategory(){
 			$query = $this->db->get('categories');
 			return $query;
 		}
 		public function viewQuestions(){
-			$q = "select id,question from questions";
+			$q = "select id,question from questions order by sort_order";
 			$query = $this->db->query($q);
 			return $query->result();
 		}

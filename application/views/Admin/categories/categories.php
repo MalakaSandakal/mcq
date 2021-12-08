@@ -88,8 +88,6 @@
                             <td>
                                 <a href="<?php echo base_url('admin/categories/edit/').$row->id ?>"
                                     class="button-admin btn-edit">edit</a>
-                                <button type="button" class="btn button-admin btn-delete" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">Launch demo modal</button>
                                 <a href="<?php echo base_url('admin/categories/delete/').$row->id ?>"
                                     class="button-admin btn-delete" style="float:right">delete</a>
                             </td>

@@ -5,9 +5,20 @@
 			$this->load->database();
 		}
 
-		public function login($email, $password){
-			$query = $this->db->get_where('users', array('username'=>$username, 'password'=>$password));
-			return $query->row_array();
+		public function getAllCategories(){
+			$q = "select id,name from categories order by name ASC";
+			$query = $this->db->query($q);
+			return $query->result();
+		}
+		public function getCategory(){
+			$query = $this->db->get('categories');
+			return $query;
+		}	
+
+		public function get_questions($id){	
+			$query = "select get_questions_by_category('$id')";			
+			$res = $this->db->query($query);
+			return $res->result();
 		}
 
 	}

@@ -72,7 +72,7 @@
                             <label for="category-select" class="form-label">Select category :-</label><select
                                 class="form-select category-select" aria-label="Default select example">
                                 <?php foreach ($category->result() as $row) { ?>
-                                <option id="" value="<?php echo $row->id;?>"><?php echo $row->name;?></option>
+                                    <option id="" value="<?php echo $row->id;?>"><?php echo $row->name;?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -125,7 +125,9 @@
                 is_correct: checkbox
             });
         }
+
         const id_ = "<?php echo $id ?>";
+
         if (answer_groups.length > 0) {
             $.ajax({
                 url: "<?php echo base_url(); ?>admin/update_q/" + id_,

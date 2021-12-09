@@ -51,11 +51,11 @@
 			$this->db->query($query);
 		}
 
-
 		public function getCategory(){
 			$query = $this->db->get('categories');
 			return $query;
 		}
+
 		public function viewQuestions(){
 			$q = "select id,question from questions order by sort_order";
 			$query = $this->db->query($q);

@@ -42,6 +42,7 @@
 		public function addQuestions($json_data){
 			$query = "select add_question('$json_data')";
 			$this->db->query($query);
+			redirect('admin');
 		}
 
 		public function updateQuestions($id_, $json_data){

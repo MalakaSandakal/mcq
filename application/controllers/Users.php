@@ -20,9 +20,9 @@ class Users extends CI_Controller {
 
 		$json = $this->users_model->get_questions($id);
 
-		print_r(json_encode($json));
+		$d1 = $json[0];
 
-		$data['encode']= $json;
+		$data['questions'] = $d1;
 
 		$this->load->view('Users/questions',$data);
 

@@ -136,6 +136,7 @@
                 data: body,
                 success: function() {
                     $('.success-msg').css('display','block');
+                    window.location.replace("<?php echo base_url(); ?>admin/questions");
                 },
                 error: function() {
                     $('.error-msg').css('display','block');

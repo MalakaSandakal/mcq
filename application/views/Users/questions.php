@@ -11,20 +11,23 @@
     <!-- fontawsome icons css -->
     <!-- custom style sheets -->
     <title>MCQ</title>
+    <style>
+    .correct{
+        display:none;
+    }
+    </style>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <?php
-        foreach($encode as $d){
-            echo($d);
-        }
-    ?>
     <section>
         <div class="color-sectn">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-4">
-                        <!-- <img src="img\ceydigital.png" class="img-batch"> -->
+                        <img src="img\ceydigital.png" class="img-batch">
                     </div>
                 </div>
                 <div class="row justify-content-center">
@@ -39,82 +42,39 @@
     </section>
     <section>
         <div class="container">
-            
             <h4 class="inner" id=""></h4>
             <div class="row justify-content-around">
-                <div class="col-9 crd-responsive">
+                <div class="col-8 crd-responsive">
                     <div class="qna-sec">
-                        <div class="card border-primary">
-                            <div class="card-body">
-                                <h6>01.<span style="color: rgb(119, 119, 119);">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa iusto mollitia
-                                        facere
-                                        vel, voluptatum architecto ullam delectus dolor a suscipit, voluptatem fuga
-                                        ipsum
-                                        obcaecati iste est vero reiciendis
-                                        illum illo.</span>
-                                </h6>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault1"
-                                        id="flexRadioDefault1" />
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                                        industry.
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault1"
-                                        id="flexRadioDefault2" />
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        It has survived not only five centuries, but also the leap into
-                                        electronic
-                                        typesetting, remaining essentially unchanged.
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault1"
-                                        id="flexRadioDefault3" />
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        There are many variations of passages of Lorem Ipsum available, but the
-                                        majority have suffered alteration in some form, by injected humour, or
-                                        randomised words which don't look even slightly believable.
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault1"
-                                        id="flexRadioDefault4" />
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        All the Lorem Ipsum generators on the Internet tend to repeat predefined
-                                        chunks as necessary, making this the first true generator on the
-                                        Internet.
-                                    </label>
-                                </div>
-                                <center>
-                                    <button class="btn border-info" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">Show answer</button>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ...
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </center>
+
+                        <?php foreach ($questions as $question):
+                              $decode_q = json_decode($question);
+                              for($x = 0;$x<count($decode_q); $x++):
+                        ?>
+
+                        <div class="card mt-3 ">                            
+                            <div class="card-body question-card"  id="">                                 
+                                <!-- question -->
+                                <h6>
+                                    <?php echo ($decode_q[$x]->question);?>
+                                </h6>  
+
+                                <!-- answers -->
+                                <?php for($a = 0;$a<count($decode_q[$x]->answers);$a++):
+
+                                    $answers = $decode_q[$x]->answers[$a];?>
+
+                                    <div class="form-check" id="<?php echo $a ?>">
+                                        <input class="form-check-input" onclick="check(id)" type="radio" value="<?php echo($answers->is_correct)?>" name="flexRadioDefault1" id=""/>
+                                        <label class="form-check-label" for="flexRadioDefault1"><?php echo($answers->answer)?></label>
+                                    </div>    
+
+                                <?php endfor ?>
+                                <button class="btn btn-primary border-primary" onclick="check_answer()">Check my answer</button>
                             </div>
-                        </div>
+                        </div>                        
+                        <?php endfor ?>
+                        <?php  endforeach ?>
                     </div>
                     <hr>
                 </div>
@@ -126,33 +86,39 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     <!-- jquery cdn -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- custom js -->
     <script>
-        // function get_questions(){        
-        //     const id ='<?php echo $id?>';
-        //     const question = document.querySelector('.inner');
-        //     $.ajax({
-        //     url: '<?php echo base_url();?>category/get/'+id,
-        //     data : {
-        //         id: id,
-        //     },
-        //     method: 'post',
-        //     success :function(response){
 
-        //         const parsed = JSON.parse(response);
-        //         question.id = parsed.message;
 
-        //         console.log(parsed.message);
-        //         alert('success');             
-        //     },
-        //     error :function(){
-        //         alert('error');
-        //     }
-        // })  
-        // }  
-        // get_questions();
+        function check_answer(){
+            console.log('value');
+        }
+
+        function check(id){
+            const parent = document.querySelector('#'+id).parentNode.parentNode.id;
+            const rad_buttons = document.querySelectorAll('#'+parent);
+            for(var i=0; i<rad_buttons.length; i++){
+                console.log(rad_buttons[i].id);
+            }
+        }
+
+        function set_id_for_radio_buttons(){
+
+            const radio_buttons = document.querySelectorAll('.card .card-body .form-check .form-check-input');
+            for(var i=0; i<radio_buttons.length; i++){
+                radio_buttons[i].id = 'rb-id-'+ i;
+            }
+
+            const question_cards = document.querySelectorAll('.question-card');
+            for(var i=0; i<question_cards.length; i++ ){
+                question_cards[i].id = 'qc-id-'+i;
+            }
+
+        }
+
+        set_id_for_radio_buttons();
+
     </script>
 </body>
+
 </html>

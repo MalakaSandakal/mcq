@@ -18,7 +18,8 @@
 		public function get_questions($id){	
 			$query = "select get_questions_by_category('$id')";			
 			$res = $this->db->query($query);
-			return $res->result();
+			return $res->result_array();
+
 		}
 
 	}

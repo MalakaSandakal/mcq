@@ -1,0 +1,106 @@
+body{
+    font-family: 'Roboto', sans-serif;
+}
+.fa-align-left {
+    color: #d6d6d6;
+    float: left;
+    margin-right: 10px;
+    font-size: 15px;
+}
+.fa-caret-right {
+    float: right;
+    margin-left: 10px;
+    font-size: 24px; 
+    color: #d6d6d6;
+}
+.category-grp {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: left;
+    margin-bottom: 16px;
+    box-shadow: 1px 1px 3px 2px #c4c4c459;
+    font-weight: 600;
+    color: #484848;
+    display: inline-flex;
+    border: none;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(255 255 255 / 9%) 51%, rgb(238 238 238 / 36%) 100%);
+}
+.category-grp:hover {
+    box-shadow: 1px 1px 7px #ababab;
+}
+.fa-clipboard-list{
+    font-size: 20px;
+}
+.categories-sec{
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    border: 2px solid rgba(128, 128, 128, 0.116);
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 0px 6px 6px #e6e6e666;
+}
+h2.categories-head{
+    text-decoration: underline;
+}
+.category-name{
+    width: 96%;
+    letter-spacing: 1px;
+}
+.right-btn-sec{
+    width: 2%;
+}
+.btn-left-icon{
+    width: 2%;
+}
+a{
+    text-decoration: none;
+}
+h6.question{
+    letter-spacing: 0.5px;
+    color:#484848;
+    font-weight: 600;
+    line-height: 25px;
+    font-family: 'Roboto', sans-serif;
+}
+.question-card-def{
+    border-bottom: 2px solid rgba(0, 0, 0, 0.247);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 10px;
+}
+.form-check{
+    font-size: 15px;
+}
+.answer-check{
+    font-size: 13px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    width: 100%;
+}
+.question-card{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.quest-hr{
+    color:cornflowerblue;
+}
+.quest-title{
+    font-size: 13px;
+    color: slategrey;
+}
+.form-check{
+    /* padding-left: 50px; */
+}
+.crd-responsive{
+    box-shadow:0px 0px 10px 0px #c1c1c1;
+    border-radius: 5px;
+}

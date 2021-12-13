@@ -10,6 +10,12 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <!-- fontawsome icons css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <!-- custom style sheets -->
+    <link rel="stylesheet" href="<?php echo base_url()?>style/style.css"/>
 
     <!-- custom style sheets -->
     <title>MCQ</title>
@@ -53,16 +59,16 @@
             <div class="row justify-content-around">
                 <div class="col-8 crd-responsive">
                     <div class="qna-sec">
-
                         <?php foreach ($questions as $question):
                               $decode_q = json_decode($question);
                               for($x = 0;$x<count($decode_q); $x++):
                         ?>
 
-                        <div class="card mt-3 ">                            
+                        <div class="card question-card-def mt-3 mb-3">                            
                             <div class="card-body question-card"  id="">                                 
                                 <!-- question -->
-                                <h6>
+                                <h6 class="question mb-3 mt-3">
+                                    <span class="quest-title">Question -: </span>
                                     <?php echo ($decode_q[$x]->question);?>
                                 </h6>  
 
@@ -71,7 +77,7 @@
 
                                     $answers = $decode_q[$x]->answers[$a];?>
 
-                                    <div class="form-check" id="<?php echo $a ?>">
+                                    <div class="form-check mt-2" id="<?php echo $a ?>">
                                         <input class="form-check-input" type="radio" value="<?php echo($answers->is_correct)?>" name="flexRadioDefault1" id=""/>
                                         <label class="form-check-label" for="flexRadioDefault1"><?php echo($answers->answer)?></label>
                                         <i class="far fa-check-circle correct"></i>
@@ -79,13 +85,12 @@
                                     </div>    
 
                                 <?php endfor ?>
-                                <button class="btn btn-primary border-primary answer-check mt-3" onclick="check_answer(id)">Check correct answer</button>
+                                <button class="btn btn-info answer-check mt-3" onclick="check_answer(id)">Check answer</button>
                             </div>
-                        </div>                        
+                        </div>                  
                         <?php endfor ?>
                         <?php  endforeach ?>
                     </div>
-                    <hr>
                 </div>
             </div>
         </div>

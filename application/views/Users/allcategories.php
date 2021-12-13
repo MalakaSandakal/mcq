@@ -8,35 +8,35 @@
     <!-- bootstrap css cdn -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-    <!-- fontawsome icons css -->
-    <link rel="stylesheet" href="style/css/css/all.css" />
+    <!-- fontawsome icons css -->    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <!-- custom style sheets -->
-    <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="<?php echo base_url()?>style/style.css"/>
     <title>All categories</title>
 </head>
 
 <body>
-    <section>
+    <section class="cat-sec">
         <div class="container px-4">
             <div class="row gx-5">
                 <div class="col pt-4" id="categories">
-                    <div class="p-3 border bg-light">
-                        <div class="header">Title Name</div>
-                        <hr>
-                        <div class="row">
+                    <div class="categories-sec">
+                        <h2 class="categories-head">Select your category .</h2>
+                        <div class="row mt-5">
                             <?php foreach($category as $row) : ?>
-                                <div class="col-4">
-                                    <a href="<?php echo base_url('category/').$row->id ?>"><button type="button" class="btn category-grp"><?php echo $row->name;?></button></a>
+                                <div class="col-4 mt-3">
+                                    <a href="<?php echo base_url('category/').$row->id ?>"><button type="button" class="btn category-grp">
+                                    <div class="category-name">
+                                        <?php echo $row->name;?>
+                                    </div>    
+                                    <div class="right-btn-sec">
+                                        <i class="fas fa-caret-right"></i>
+                                    </div></button></a>
                                 </div>
-                            <!-- <tr>
-                                <td class="l-width"><?php echo $row->name;?></td>
-                                <td>
-                                    <a href="<?php echo base_url('admin/categories/edit/').$row->id ?>"
-                                        class="button-admin btn-edit">edit</a>
-                                    <a href="<?php echo base_url('admin/categories/delete/').$row->id ?>"
-                                        class="button-admin btn-delete" style="float:right">delete</a>
-                                </td>
-                            </tr> -->
                             <?php endforeach; ?>
                             
                         </div>

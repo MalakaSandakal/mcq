@@ -9,11 +9,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <!-- fontawsome icons css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- custom style sheets -->
     <title>MCQ</title>
     <style>
     .correct{
         display:none;
+        color:#28da28;
+    }
+    .wrong{
+        display:none;
+        color:#ea4646;
     }
     </style>
     
@@ -65,12 +72,14 @@
                                     $answers = $decode_q[$x]->answers[$a];?>
 
                                     <div class="form-check" id="<?php echo $a ?>">
-                                        <input class="form-check-input" onclick="check(id)" type="radio" value="<?php echo($answers->is_correct)?>" name="flexRadioDefault1" id=""/>
+                                        <input class="form-check-input" type="radio" value="<?php echo($answers->is_correct)?>" name="flexRadioDefault1" id=""/>
                                         <label class="form-check-label" for="flexRadioDefault1"><?php echo($answers->answer)?></label>
+                                        <i class="far fa-check-circle correct"></i>
+                                        <i class="far fa-times-circle wrong"></i>
                                     </div>    
 
                                 <?php endfor ?>
-                                <button class="btn btn-primary border-primary" onclick="check_answer()">Check my answer</button>
+                                <button class="btn btn-primary border-primary answer-check mt-3" onclick="check_answer(id)">Check correct answer</button>
                             </div>
                         </div>                        
                         <?php endfor ?>
@@ -87,18 +96,29 @@
     </script>
     <!-- jquery cdn -->
     <!-- custom js -->
-    <script>
+    <script>      
 
+        function check_answer(id){
 
-        function check_answer(){
-            console.log('value');
-        }
+            const parent = document.querySelector('#'+id).parentNode.id;
+            const all_radio_btns = document.querySelectorAll('#'+parent+' .form-check .form-check-input');
+            const correct_answer = document.querySelectorAll('#'+parent+' .form-check .correct');
+            const wrong_answer = document.querySelectorAll('#'+parent+' .form-check .wrong');
 
-        function check(id){
-            const parent = document.querySelector('#'+id).parentNode.parentNode.id;
-            const rad_buttons = document.querySelectorAll('#'+parent);
-            for(var i=0; i<rad_buttons.length; i++){
-                console.log(rad_buttons[i].id);
+            for(var i=0; i<all_radio_btns.length; i++){
+
+                if(all_radio_btns[i].id == id){
+                    all_radio_btns[i].disabled = false;
+                }else{
+                    all_radio_btns[i].disabled = true;
+                }
+
+                if(all_radio_btns[i].value == '1'){
+                    correct_answer[i].style.display = "inline-flex";
+                    all_radio_btns[i].disabled = false;
+                }else{
+                    wrong_answer[i].style.display = "inline-flex";
+                }
             }
         }
 
@@ -110,8 +130,12 @@
             }
 
             const question_cards = document.querySelectorAll('.question-card');
+            const check_answer_buttons = document.querySelectorAll('.answer-check');
             for(var i=0; i<question_cards.length; i++ ){
                 question_cards[i].id = 'qc-id-'+i;
+            }
+            for(var i=0; i<check_answer_buttons.length; i++ ){
+                check_answer_buttons[i].id = 'ca-id-'+i;
             }
 
         }

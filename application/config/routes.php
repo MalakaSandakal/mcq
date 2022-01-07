@@ -5,8 +5,6 @@ $route['default_controller'] = 'users';
 $route['category/(:any)'] = 'users/viewQuestions/$1';
 $route['category/get/(:any)'] = 'users/viewQuestions_/$1';
 
-
-
 $route['admin'] = 'admin';
 $route['admin/questions'] = 'admin/home';
 $route['admin/addQuestion'] = 'admin/addQuestions';

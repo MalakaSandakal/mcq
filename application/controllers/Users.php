@@ -18,6 +18,8 @@ class Users extends CI_Controller {
 
 		$data['id'] = $id;		
 
+		$data['category'] = $this->users_model->getCategoryName($id);
+
 		$json = $this->users_model->get_questions($id);
 
 		$d1 = $json[0];

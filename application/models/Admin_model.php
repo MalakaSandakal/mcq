@@ -63,6 +63,7 @@
 			return $query->result();
 		}
 
+
 		public function editQuestion($id){
 			$query = "select get_question('$id')";			
 			$res = $this->db->query($query);

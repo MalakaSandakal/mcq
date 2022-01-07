@@ -138,6 +138,7 @@ class Admin extends CI_Controller {
 	public function home(){
 		$this->load->library('session');
 		if($this->session->userdata('user')){
+
 			$data['question'] = $this->admin_model->viewQuestions();		
 			$this->load->view('Admin/questions/questions', $data);
 		}

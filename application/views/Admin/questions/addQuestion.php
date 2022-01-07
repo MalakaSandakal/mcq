@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CodeIgniter Login</title>
+    <title>MCQ Hero - Add Question</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style>
@@ -61,6 +61,7 @@
             <div class="col-md-8 mt-5">
                 <div class="main">
                     <div class="question">
+                        
                         <div class="mb-3">
                             <label for="" class="form-label">Question :- </label>
                             <input name="question" type="text" class="question-input form-control" />
@@ -136,10 +137,14 @@
                 data: body,
                 success: function() {
                     $('.success-msg').css('display','block');
-                    window.location.replace("<?php echo base_url(); ?>admin/questions");
+                    $('.success-msg').css('color','green');
+                    setInterval(() => {                        
+                        window.location.replace("<?php echo base_url(); ?>admin/questions");
+                    }, 2000);
                 },
                 error: function() {
                     $('.error-msg').css('display','block');
+                    $('.error-msg').css('color','red');
                 },
             });
         } else {

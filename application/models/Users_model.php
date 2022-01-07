@@ -10,6 +10,12 @@
 			$query = $this->db->query($q);
 			return $query->result();
 		}
+
+		public function getCategoryName($id){
+			$query = $this->db->get_where('categories',['id' => $id]);
+			return $query->row();
+		}
+
 		public function getCategory(){
 			$query = $this->db->get('categories');
 			return $query;
@@ -19,7 +25,6 @@
 			$query = "select get_questions_by_category('$id')";			
 			$res = $this->db->query($query);
 			return $res->result_array();
-
 		}
 
 	}

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>CodeIgniter Login</title>
+    <title>MCQ Hero - Edit Question</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <style>
@@ -24,6 +24,9 @@
     }
     .success-msg,.error-msg{
         display:none;
+    }
+    .alert{
+        padding:0rem 1rem !important;
     }
     </style>
 </head>
@@ -60,6 +63,7 @@
             <div class="col-md-8 mt-5">
                 <div class="main">
                     <div class="question">
+                        
                         <div class="mb-3">
                             <label for="" class="form-label">Question :- </label>
                             <input name="question" type="text" class="question-input form-control" />
@@ -68,7 +72,7 @@
                             <label for="sort-number" class="form-label">Sort Number :-</label>
                             <input name="sort-number" type="number" class="sort-number form-control" />
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3">                            
                             <label for="category-select" class="form-label">Select category :-</label><select
                                 class="form-select category-select" aria-label="Default select example">
                                 <?php foreach ($category->result() as $row) { ?>
@@ -84,7 +88,9 @@
                             <div class="answers mb-3"></div>
                         </div>
                     </div>
-                    ​
+                    ​<div class="alert alert-danger" role="alert">
+                            Please check the category before submit!
+                    </div>
                     <button type="btn" class="btn btn-primary" onclick="submit_question()">Submit</button>
                 </div>
             </div>
@@ -135,9 +141,14 @@
                 data: body,
                 success: function() {
                     $('.success-msg').css('display','block');
+                    $('.success-msg').css('color','green');
+                    setInterval(() => {                        
+                        window.location.replace("<?php echo base_url(); ?>admin/questions");
+                    }, 2000);
                 }, 
                 error: function() {
                     $('.error-msg').css('display','block');
+                    $('.error-msg').css('color','red');
                 },
             });
         } else {

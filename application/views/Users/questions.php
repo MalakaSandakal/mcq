@@ -14,11 +14,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     <!-- custom style sheets -->
     <link rel="stylesheet" href="<?php echo base_url()?>style/style.css"/>
 
     <!-- custom style sheets -->
-    <title>MCQ</title>
+    <title>MCQ Hero - <?php echo $category->name?></title>
     <style>
     .correct{
         display:none;
@@ -28,47 +30,47 @@
         display:none;
         color:#ea4646;
     }
+    body{
+        padding-bottom: 30px;
+    }
+    .fa-arrow-left,.top-head{
+        display:inline;
+    }
+    .fa-arrow-left{
+        position: absolute;
+    }
     </style>
     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    
 </head>
 
 <body>
+    <div class="top-bar-sec sticky-top">
+        <i class="fas fa-arrow-left"></i>
+        <h3 class="top-head"><?php echo $category->name?></h3>
+    </div>
+    <div class="test-img-sec">
+        <img src="<?php echo base_url()?>images/grad-rem.png" class="questions-btm-img" alt="">
+    </div>
+    <div class="test-img-sec-2">
+        <img src="<?php echo base_url()?>images/book.jpg" class="questions-btm-img-2" alt="">
+    </div>
     <section>
-        <div class="color-sectn">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-4">
-                        <img src="img\ceydigital.png" class="img-batch">
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-8">
-                        <p class="mission">Various versions have evolved over the years, sometimes by accident,
-                            sometimes on
-                            purpose</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="container">
-            <h4 class="inner" id=""></h4>
+        <div class="container mt-5">
             <div class="row justify-content-around">
                 <div class="col-8 crd-responsive">
-                    <div class="qna-sec">
+                    <div class="qna-sec gx-5">
                         <?php foreach ($questions as $question):
                               $decode_q = json_decode($question);
                               for($x = 0;$x<count($decode_q); $x++):
                         ?>
 
-                        <div class="card question-card-def mt-3 mb-3">                            
+                        <div class="card question-card-def mt-3 mb-3 col-md-8">                            
                             <div class="card-body question-card"  id="">                                 
                                 <!-- question -->
-                                <h6 class="question mb-3 mt-3">
-                                    <span class="quest-title">Question -: </span>
+                                <h6 class="question mt-3">
+                                    <i class="fas fa-question-circle"></i>
                                     <?php echo ($decode_q[$x]->question);?>
                                 </h6>  
 
@@ -78,19 +80,21 @@
                                     $answers = $decode_q[$x]->answers[$a];?>
 
                                     <div class="form-check mt-2" id="<?php echo $a ?>">
-                                        <input class="form-check-input" type="radio" value="<?php echo($answers->is_correct)?>" name="flexRadioDefault1" id=""/>
+                                        <input class="form-check-input" type="radio" value="<?php echo($answers->is_correct)?>" onclick="enable_show_btn(id)" name="flexRadioDefault1" id=""/>
                                         <label class="form-check-label" for="flexRadioDefault1"><?php echo($answers->answer)?></label>
                                         <i class="far fa-check-circle correct"></i>
                                         <i class="far fa-times-circle wrong"></i>
                                     </div>    
 
                                 <?php endfor ?>
-                                <button class="btn btn-info answer-check mt-3" onclick="check_answer(id)">Check answer</button>
+                                <button class="btn btn-success answer-check mt-3" onclick="check_answer(id)">Check answer</button>
                             </div>
-                        </div>                  
+                            <hr class="questions-divider">   
+                        </div>               
                         <?php endfor ?>
                         <?php  endforeach ?>
                     </div>
+                    <button class="btn" id="loadmore" onclick="loadMore();">Load More <i class="far fa-arrow-alt-circle-down"></i></button>
                 </div>
             </div>
         </div>
@@ -109,6 +113,7 @@
             const all_radio_btns = document.querySelectorAll('#'+parent+' .form-check .form-check-input');
             const correct_answer = document.querySelectorAll('#'+parent+' .form-check .correct');
             const wrong_answer = document.querySelectorAll('#'+parent+' .form-check .wrong');
+            const check_answer_btn = document.querySelector('#'+parent+' .answer-check');
 
             for(var i=0; i<all_radio_btns.length; i++){
 
@@ -120,9 +125,15 @@
 
                 if(all_radio_btns[i].value == '1'){
                     correct_answer[i].style.display = "inline-flex";
-                    all_radio_btns[i].disabled = false;
+                    // all_radio_btns[i].disabled = false;
                 }else{
                     wrong_answer[i].style.display = "inline-flex";
+                }
+
+                if(all_radio_btns[i].checked){
+                    all_radio_btns[i].style.backgroundColor = "black";
+                }else{
+                    all_radio_btns[i].style.backgroundColor = "";
                 }
             }
         }
@@ -146,6 +157,36 @@
         }
 
         set_id_for_radio_buttons();
+
+        function enable_show_btn(id){
+            const parent = document.querySelector('#'+id).parentNode.parentNode.id;
+            const check_answer_btn = document.querySelector('#'+parent+' .answer-check');
+            
+            check_answer_btn.classList.add("enable-btn");            
+        }
+
+        var display_count = 20;
+        var q_crds = document.querySelectorAll('.question-card-def');
+
+        function loadMore(){
+            display_count = display_count+20;
+            display_init();
+        }
+        
+        function display_init(){       
+            for(var i=0; i<q_crds.length; i++){
+                if(i>display_count){
+                    q_crds[i].style.display = "none";
+                } else{
+                    q_crds[i].style.display = "";
+                }
+            }
+            if(display_count>=q_crds.length){                
+                document.querySelector('#loadmore').style.display = "none"; 
+            }
+        }
+
+        display_init();
 
     </script>
 </body>
